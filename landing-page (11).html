@@ -523,6 +523,87 @@ footer {
   .feat-card.large { grid-template-columns: 1fr; }
   .mini-grid { font-size: 8px; grid-template-columns: 50px repeat(7, 1fr); }
 }
+
+  /* THOUGHT JOURNEY ANIMATION */
+  .thought-journey {
+    width: 100%; max-width: 680px; margin: 2.5rem auto 0;
+    position: relative; z-index: 1;
+  }
+  .journey-stages {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; flex-wrap: nowrap;
+  }
+  .journey-stage {
+    flex: 1; background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: 16px; padding: 1.25rem 1rem;
+    text-align: center; position: relative;
+    animation: stageFloat linear infinite;
+  }
+  .journey-stage:nth-child(1) { animation-duration: 3s; animation-delay: 0s; border-color: rgba(232,36,36,0.2); }
+  .journey-stage:nth-child(3) { animation-duration: 3.5s; animation-delay: -0.8s; border-color: rgba(239,159,39,0.3); }
+  .journey-stage:nth-child(5) { animation-duration: 2.8s; animation-delay: -1.2s; border-color: rgba(29,158,117,0.3); }
+  @keyframes stageFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .journey-arrow {
+    font-size: 24px; color: var(--muted); flex-shrink: 0;
+    padding: 0 8px; animation: arrowPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes arrowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+  .stage-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+  .stage-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .stage-thoughts {
+    display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;
+  }
+  .thought-bubble {
+    font-size: 10px; padding: 3px 8px; border-radius: 99px;
+    animation: bubbleWobble ease-in-out infinite;
+  }
+  .thought-bubble:nth-child(1) { animation-duration: 1.8s; animation-delay: 0s; }
+  .thought-bubble:nth-child(2) { animation-duration: 2.2s; animation-delay: -0.4s; }
+  .thought-bubble:nth-child(3) { animation-duration: 1.6s; animation-delay: -0.8s; }
+  .thought-bubble:nth-child(4) { animation-duration: 2s; animation-delay: -0.2s; }
+  .thought-bubble:nth-child(5) { animation-duration: 1.9s; animation-delay: -0.6s; }
+  @keyframes bubbleWobble {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-4px) rotate(-2deg) scale(1.05); }
+    75% { transform: translateY(3px) rotate(2deg) scale(0.97); }
+  }
+  .thought-chaotic { background: #FCEBEB; color: #A32D2D; }
+  .thought-typing { background: #FAEEDA; color: #854F0B; }
+  .thought-clean { background: #E1F5EE; color: #0F6E56; }
+
+  /* TYPING CURSOR */
+  .typing-cursor {
+    display: inline-block; width: 2px; height: 14px;
+    background: #EF9F27; margin-left: 2px; vertical-align: middle;
+    animation: blink 0.7s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; } 50% { opacity: 0; }
+  }
+
+  /* ORGANISED ITEMS */
+  .organised-list { display: flex; flex-direction: column; gap: 4px; }
+  .organised-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; background: #E1F5EE;
+    color: #0F6E56; padding: 4px 8px;
+    border-radius: 6px; font-weight: 500;
+    animation: slideInItem 0.5s ease both;
+  }
+  .organised-item:nth-child(1) { animation-delay: 0s; }
+  .organised-item:nth-child(2) { animation-delay: 0.15s; }
+  .organised-item:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes slideInItem {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
 </style>
 </head>
 <body>
@@ -560,6 +641,53 @@ footer {
       <div class="proof-avatar" style="background:#EF9F27;">R</div>
     </div>
     Loved by ADHD brains everywhere
+  </div>
+
+  <!-- THOUGHT JOURNEY ANIMATION -->
+  <div class="thought-journey">
+    <div class="journey-stages">
+
+      <!-- Stage 1: Chaos -->
+      <div class="journey-stage">
+        <span class="stage-icon">🌀</span>
+        <div class="stage-title" style="color:#E24B4A;">The chaos</div>
+        <div class="stage-thoughts">
+          <span class="thought-bubble thought-chaotic">pay bills??</span>
+          <span class="thought-bubble thought-chaotic">post today!</span>
+          <span class="thought-bubble thought-chaotic">that idea...</span>
+          <span class="thought-bubble thought-chaotic">call back</span>
+          <span class="thought-bubble thought-chaotic">WHERE TO START</span>
+        </div>
+      </div>
+
+      <div class="journey-arrow">→</div>
+
+      <!-- Stage 2: Dump it -->
+      <div class="journey-stage">
+        <span class="stage-icon">✍️</span>
+        <div class="stage-title" style="color:#EF9F27;">Dump it</div>
+        <div class="stage-thoughts">
+          <span class="thought-bubble thought-typing">pay bills??</span>
+          <span class="thought-bubble thought-typing">post today!</span>
+          <span class="thought-bubble thought-typing">that idea...</span>
+          <span class="thought-bubble thought-typing">call back<span class="typing-cursor"></span></span>
+        </div>
+      </div>
+
+      <div class="journey-arrow">→</div>
+
+      <!-- Stage 3: Clarity -->
+      <div class="journey-stage">
+        <span class="stage-icon">✅</span>
+        <div class="stage-title" style="color:#1D9E75;">Clarity</div>
+        <div class="organised-list">
+          <div class="organised-item">✓ Urgent — pay bills</div>
+          <div class="organised-item">✓ Post Instagram reel</div>
+          <div class="organised-item">✓ Save idea for later</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
